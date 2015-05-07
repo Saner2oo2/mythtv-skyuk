@@ -23,7 +23,7 @@ update channel set xmltvid="6952.dvb.guide" where callsign="CBBC HD";
 update channel set channum="614" where callsign="CBeebies HD";
 update channel set xmltvid="8932.dvb.guide" where callsign="CBeebies HD";
 update channel set channum="615" where callsign="Nick Jr.";
-update channel set xmltvid="51088.dvb.guide" where callsign="Nick Jr";
+update channel set xmltvid="5563.dvb.guide" where callsign="Nick Jr";
 update channel set channum="616" where callsign="POP";
 update channel set xmltvid="53340.dvb.guide" where callsign="POP";
 update channel set channum="617" where callsign="Tiny Pop";

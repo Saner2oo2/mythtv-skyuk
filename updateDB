@@ -9,5 +9,6 @@ mysql -u mythtv -pmythtv mythconverg < Entertainment.sql
 mysql -u mythtv -pmythtv mythconverg < Sports.sql
 mysql -u mythtv -pmythtv mythconverg < Movies.sql
 mysql -u mythtv -pmythtv mythconverg < Knowledge.sql
+mysql -u mythtv -pmythtv mythconverg < Kids.sql
 
 
