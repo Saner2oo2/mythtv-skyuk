@@ -12,7 +12,7 @@ All the info (Channel numbers, XML tag is in the dump, I am sure someone clevere
 
 install szap ( build yourself or apt-get install dvb-apps) you no doubt already have it installed.
 
-The updatepg script, may beed editing for thouse of you using ffdecsawrapper or similar (naughty naughty)
+edit updateepg
 
 set the script to run at midnight, or a time when you are not recording, as it kills mythbackend
 
