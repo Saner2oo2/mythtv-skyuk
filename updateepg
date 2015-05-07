@@ -1,0 +1,13 @@
+#!/bin/bash
+today=$(date '+%d_%m_%y')
+#tv_grab_uk_atlas > "$today".xml
+#tv_grab_uk_rt > "$today".rt.xml
+tv_grab_dvb_plus  --format skyuk --output "$today".sky.xml
+ sed -i 's/ <!-- number.*-->//g' "$today".sky.xml
+#mythfilldatabase --file --sourceid 1  --xmlfile "$today".xml
+#mythfilldatabase --file --sourceid 1  --xmlfile "$today".rt.xml
+mythfilldatabase --file --sourceid 1  --xmlfile "$today".sky.xml
+#rm -rf "$today".xml
+#rm -rf "$today".rt.xml
+rm -rf "$today".sky.xml
+echo "EPG Imported: $(date)" >> /home/mythtv/epg.log
