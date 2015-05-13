@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 use v5.14;
 use warnings;
-no warnings 'uninitialized';
+
 
 until(eof()) {
     my ($id, $chan) = <> =~ /id="([^"]*)".*number="(\d+)"/;
@@ -10,4 +10,4 @@ until(eof()) {
 
     say qq(UPDATE channel SET channum="$chan",xmltvid="$id" WHERE callsign="$sign");
 }
-exit 42;
+

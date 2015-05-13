@@ -18,4 +18,6 @@ killall szap
 cp "$today".sky.xml "$today".db.xml
 sed -i '/<?xml version="/,/<channel id=/d'
 sed -i '1,2d' "$today".db.xml
+sed -i 's/<!--/ /g'
+ sed -i 's/type.*-->>/ /g'
 dumpdb sed -i '/<?xml version="/,/<channel id=/d' > Channels.sql
