@@ -1,0 +1,22 @@
+#!/bin/bash
+#Set Date (Duh)
+today=$(date '+%d_%m_%y')
+
+#### Copy file to backup ####
+
+cp "$today".sky.xml "$today".db.xml
+
+#### Remove Uneeded Crap ####
+
+sed -i '/<?xml version="/,/<channel id=/d'  "$today".db.xml
+sed -i '1,2d' "$today".db.xml
+sed -i 's/<!--/ /g'  "$today".db.xml
+sed  -i 's/type.*-->>/>/g' "$today".db.xml
+
+#### Create SQL File ####
+
+echo | perl dumpdb  "$today".db.xml  > Chanlist.sql
+
+####Remove Bloat ####
+
+sed -i '$ d' Chanlist.sql
