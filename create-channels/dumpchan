@@ -1,0 +1,85 @@
+#!/bin/bash
+#Set Date (Duh)
+today=$(date '+%d_%m_%y')
+
+#### Backup Myth Channels YOU MAY BEED TO EDIT THIS FOR CORRECT USER/PASS####
+
+mysqldump -umythtv -pmythtv mythconverg channel > backupchannel.sql
+
+#### STOP Myth Backend, Until I can work out how to force it to a channel ####
+
+#service mythbackend stop
+#stop mythbackend
+
+####  Tune to EPG Data ####
+
+szap -c channels.conf EPG &
+
+#### Stop for 10 seconds, make this longer / shorter depending on how long your card takes to lock ####
+
+sleep 10
+
+#### Grab EPG Data ####
+
+tv_grab_dvb_plus  --format skyuk --output "$today".sky.xml
+
+#### Kill Szap ####
+
+killall szap
+
+#### Copy file to backup ####
+
+cp "$today".sky.xml "$today".db.xml
+
+#### Remove Uneeded Crap ####
+
+sed -i '/<?xml version="/,/<channel id=/d'  "$today".db.xml
+sed -i '1,2d' "$today".db.xml
+sed -i 's/<!--/ /g'  "$today".db.xml
+sed  -i 's/type.*-->>/>/g' "$today".db.xml
+
+#### Create SQL File ####
+
+echo | perl dumpdb  "$today".db.xml  > Chanlist.sql
+
+#### (Bodge Fix Alert) Add a ";" (Will fix later) #### 
+
+sed -i 's/$/;/' Chanlist.sql
+
+#### Remove Bloat & HD Channels ####
+
+sed -i 's/.*HD.*//g' Chanlist.sql
+sed -i '$ d' Chanlist.sql
+
+#### Fix Broken Channels ####
+
+bash fixerrors
+
+#### Remove old data ####
+
+bash mysql 
+
+#### Import Channel setup AGAIN THIS MAY BEED EDITING FOR CORRECT USER/PASS####
+
+mysql -umythtv -pmythtv mythconverg < Chanlist.sql
+
+#### Disable Broken Channels ####
+
+#bash mysql2
+
+#### Remove unwanted ####
+
+rm -rf "$today".*
+
+#### Start Mythbackend ####
+
+#service mythbackend start
+#start mythbackend
+
+
+#### Done ####
+
+clear
+echo "Good to go, use MythTVweb (or similar) to set the odd channels (eg BBC 1) or make channels invisible."
+
+#### Done ####

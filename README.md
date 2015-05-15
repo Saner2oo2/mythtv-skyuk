@@ -1,29 +1,22 @@
-# mythtv-skyuk
+This is a very much, use at your own risk setup.
 
-This is for my own personal use, however others may find handy.
+Initially you will want to set up your channels ordering and numbers, you can do this by running 
 
-DISCLAIMER - I am by no means a programmer, or expert, this is all info I picked up from places, so I may have made some errors.
+./dumpchan (in /create-channels)
 
-Basic Guide here (https://github.com/Saner2oo2/mythtv-skyuk/wiki/Basic-usage.)
+This *should* sort out all you channels for you, most of the HD ones are removed as they are usless.
 
-note. Some channels are missing (some +1's and a few others, but the bulk are there) I will update when have time to do a rescan.
+Once you have your channels setup you can run 
 
-All the info (Channel numbers, XML tag is in the dump, I am sure someone cleverer than me can create an all in one script (hint, hint!)
+./updateepg (in /grab-epg)
 
-install szap ( build yourself or apt-get install dvb-apps) you no doubt already have it installed.
+This *should* pull the next 7 days EPG data and insert it into MythTV.
 
-edit updateepg
+Every step is hashed, so you can read and see what it is doing.
 
-set the script to run at midnight, or a time when you are not recording, as it kills mythbackend
+You will need to set some channels to invisible (obviously) as Sky have duplicates, and it would be a nightmare to setup a script based on regions.
 
-Channels all numbered and set for correct xml info for import (no doubt I have missed some)
-
-
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="TA4EPAWR72HSC">
-<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-</form>
+You will have lots of "N  Unknown xmltv channel identifier: " just ignore them and they might go away :).
 
 
+TODO - Fix Radio Stations, Fix E4, clean up scripts, look at using Bouquets for regional setups.
