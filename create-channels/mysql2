@@ -1,0 +1,10 @@
+#!/bin/bash
+mysql -umythtv -pmythtv << EOF
+connect mythconverg;
+UPDATE channel SET useonairguide=1;
+UPDATE channel SET commmethod=-2 WHERE name LIKE '%BBC%' OR name = 'CBeebies';
+UPDATE channel SET visible=0 WHERE channel.channum = "";
+UPDATE channel SET visible=0 WHERE channel.xmltvid = "";
+UPDATE channel SET useonairguide=0 WHERE channel.xmltvid = "";
+UPDATE channel SET useonairguide=0 WHERE channel.channum = "";
+EOF

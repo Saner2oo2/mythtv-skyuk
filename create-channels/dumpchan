@@ -13,7 +13,11 @@ mysqldump -umythtv -pmythtv mythconverg channel > backupchannel.sql
 
 ####  Tune to EPG Data ####
 
-szap -c /etc/channels.conf EPG &
+szap -c channels.conf EPG &
+
+#### Stop for 10 seconds, make this longer / shorter depending on how long your card takes to lock ####
+
+sleep 10
 
 #### Grab EPG Data ####
 
@@ -42,14 +46,26 @@ echo | perl dumpdb  "$today".db.xml  > Chanlist.sql
 
 sed -i 's/$/;/' Chanlist.sql
 
-####Remove Bloat ####
+#### Remove Bloat & HD Channels ####
 
+sed -i 's/.*HD.*//g' Chanlist.sql
 sed -i '$ d' Chanlist.sql
 
+#### Fix Broken Channels ####
+
+bash fixerrors
+
+#### Remove old data ####
+
+bash mysql 
 
 #### Import Channel setup AGAIN THIS MAY BEED EDITING FOR CORRECT USER/PASS####
 
 mysql -umythtv -pmythtv mythconverg < Chanlist.sql
+
+#### Disable Broken Channels ####
+
+#bash mysql2
 
 #### Remove unwanted ####
 
