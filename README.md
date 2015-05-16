@@ -1,10 +1,13 @@
 This is a very much, use at your own risk setup.
 
-Initially you will want to set up your channels ordering and numbers, you can do this by running 
+Download and install - tv_grab_dvb_plus ( https://github.com/Saner2oo2/tv_grab_dvb_plus ) All credits to the original creators = https://github.com/silid/tv_grab_dvb_plus
 
-./dumpchan (in /create-channels)
 
-This *should* sort out all you channels for you, most of the HD ones are removed as they are usless.
+
+Initially you will want to set up your channels ordering and numbers, you can do this by running ./dumpchan (in /create-channels)
+
+This *should* sort out all you channels for you, most 
+of the HD ones are removed as they are usless.
 
 Once you have your channels setup you can run 
 
