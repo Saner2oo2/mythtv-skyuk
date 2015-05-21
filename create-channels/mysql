@@ -1,6 +1,0 @@
-#!/bin/bash
-mysql -umythtv -pmythtv << EOF
-connect mythconverg;
-UPDATE channel SET channum=" ",xmltvid=" ";
-delete from program;
-EOF
