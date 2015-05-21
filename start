@@ -1,4 +1,15 @@
 #!/bin/bash
+today=$(date '+%d_%m_%y')
+
+#### Backup Myth Channels YOU MAY BEED TO EDIT THIS FOR CORRECT USER/PASS####
+
+mysqldump -umythtv -pmythtv mythconverg channel > backupchannel.sql
+
+#### STOP Myth Backend, Until I can work out how to force it to a channel ####
+
+#service mythbackend stop
+#stop mythbackend
+
 cmd=(dialog --separate-output --checklist "Select options:" 22 76 16)
 options=(1 "Sky SD London" off
          2 "Sky SD Scotland" off
@@ -11,7 +22,17 @@ do
     case $choice in
         1)
             echo "Sky SD London"
-		tv_grab_dvb_plus -fskyuk -b'BSkyB Bouquet' >> London.xml
+#		szap -c channels.conf EPG &
+		sleep 10
+		tv_grab_dvb_plus -fskyuk -b'BSkyB Bouquet' >> "$today".sky.xml
+#		killall szap
+		cp "$today".sky.xml "$today".db.xml
+		sed -i '/<?xml version="/,/<channel id=/d'  "$today".db.xml
+		sed -i '1,2d' "$today".db.xml
+		sed -i 's/<!--/ /g'  "$today".db.xml
+		sed -i 's/type.*-->>/>/g' "$today".db.xml
+		echo | perl dumpdb  "$today".db.xml  > Chanlist.sql
+
 ;;
         2)
             echo "Sky SD Scotland"
