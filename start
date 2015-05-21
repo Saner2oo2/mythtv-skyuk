@@ -1,0 +1,26 @@
+#!/bin/bash
+cmd=(dialog --separate-output --checklist "Select options:" 22 76 16)
+options=(1 "Sky SD London" off
+         2 "Sky SD Scotland" off
+         3 "Option 3" off
+         4 "Option 4" off)
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+for choice in $choices
+do
+    case $choice in
+        1)
+            echo "Sky SD London"
+		tv_grab_dvb_plus -fskyuk -b'BSkyB Bouquet' >> London.xml
+;;
+        2)
+            echo "Sky SD Scotland"
+            ;;
+        3)
+            echo "Third Option"
+            ;;
+        4)
+            echo "Fourth Option"
+            ;;
+    esac
+done
