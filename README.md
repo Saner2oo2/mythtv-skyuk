@@ -1,3 +1,8 @@
+I HAVE MOVED TO TVHEADEND, WILL LEAVE THIS HERE FOR REFERENCE
+
+
+
+
 This is a very much, use at your own risk setup.
 
 Download and install - tv_grab_dvb_plus ( https://github.com/Saner2oo2/tv_grab_dvb_plus ) All credits to the original creators = https://github.com/silid/tv_grab_dvb_plus
